@@ -15,14 +15,24 @@ A pipeline that pulls threat intel feeds into one normalized, deduplicated IOC s
 
 ## Key Practices
 
-- TLP markings are preserved end-to-end — nothing gets re-shared past its handling label
+- TLP markings are preserved end-to-end, so nothing gets re-shared past its handling label
 - Feed health is monitored; a stale or dead feed alerts instead of silently going quiet
 - Every indicator keeps its source lineage so analysts can judge reliability, not just trust a score
 
 ## Status
 
-- Actively maintained — next up is automated feed-quality scoring.
+- Actively maintained. Next up is automated feed-quality scoring.
+
+## ☁️ Delivering intel to Microsoft Sentinel
+
+- **Watchlists:** curated IOC sets exported as Sentinel watchlist CSV. The `secops ioc` command in
+  **[azure-secops-toolkit](https://github.com/nazsam/azure-secops-toolkit)** extracts, refangs and deduplicates indicators from a report into that format.
+- **Threat intelligence tables:** STIX 2.1 indicators delivered through the Sentinel TAXII or upload API
+  connectors, so they land in the workspace's threat intelligence tables.
+- **Matching:** the toolkit's [threat intelligence IP hunt](https://github.com/nazsam/azure-secops-toolkit/blob/main/hunting/threat-intel-ip-match.kql) joins
+  active indicators against sign-in and network telemetry; the
+  [IP enrichment playbook](https://github.com/nazsam/azure-secops-toolkit/tree/main/playbooks) adds reputation to every new incident.
 
 ---
 
-*Part of the [devsecforge](https://github.com/devsecforge/devsecforge) open security program — framework-mapped, hands-on, and actively growing.*
+*Maintained by **Sam Naz**, Cybersecurity and AI Architect · [LinkedIn](https://www.linkedin.com/in/samicybersecurity) · Azure implementation: [azure-secops-toolkit](https://github.com/nazsam/azure-secops-toolkit)*
